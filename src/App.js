@@ -1,35 +1,21 @@
-import './App.css';
-import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Notfound from "./components/Notfound"
-// App.js
-function Home() {
-  return (
-    <>
-      <main>
-        <h2>Welcome to the homepage!</h2>
-        <p>You can do this, I believe in you.</p>
-      </main>
-      <nav>
-        <Link to="/about">About</Link>
-      </nav>
-    </>
-  );
-}
+import Tour from './components/layout/Tour';
+import TourDetail from './components/page/TourDetail';
+import TourList from './components/page/TourList';
+import Notfound from "./components/page/Notfound"
+import Home from "./components/page/Home"
+import Header from "./components/layout/Header"
 
-function About() {
+import * as React from "react";
+import { Routes, Route,Outlet } from "react-router-dom";
+
+function Layout() {
   return (
     <>
-      <main>
-        <h2>Who are we?</h2>
-        <p>
-          That feels like an existential question, don't you
-          think?
-        </p>
-      </main>
-      <nav>
-        <Link to="/">Home</Link>
-      </nav>
+      <Header></Header>
+      <div className="content min-h-[calc(100vh-96px)]">
+        <Outlet />
+      </div>
+      <footer className="bg-black text-white h-10 flex items-center justify-center">Ryder © 2022/08/20 練習使用</footer>
     </>
   );
 }
@@ -37,12 +23,16 @@ function About() {
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to React Router!</h1>
       {/* 註冊路由，類似 router.index.js */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={ <Notfound></Notfound>}></Route>
+        <Route path="/" element={<Layout />} >
+          <Route path="/" element={<Home />} />
+          <Route path="/tour" element={<Tour />} >
+            <Route index element={<TourList />} />
+            <Route path=":Id" element={<TourDetail />} />
+          </Route>
+          <Route path="*" element={ <Notfound />}></Route>
+        </Route>
       </Routes>
     </div>
   );

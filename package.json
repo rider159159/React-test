@@ -39,6 +39,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://rider159159.github.io/React-test"
-
+  "homepage": "https://rider159159.github.io/React-test",
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
+  }
 }
